@@ -29,7 +29,8 @@ export class AdminProductEditComponent implements OnInit {
     describtion: "",
     status: "",
     current_price: 0,
-    old_price: 0
+    old_price: 0,
+    image:""
   }
   ngOnInit(): void {
     this.isFetching = true;
@@ -40,7 +41,7 @@ export class AdminProductEditComponent implements OnInit {
         console.log(res)
         this.isFetching = false;
         this.product = res.product;
-
+        console.log(this.product.image)
       },
       err => {
         console.log(err);
@@ -64,7 +65,11 @@ export class AdminProductEditComponent implements OnInit {
           console.log(this.product)
           console.log(localStorage.getItem('token'))
           this.isFetchingImg = true
-          this.processFile(imageInput)
+          console.log(this.product.image , imageInput?.files[0]?.name)
+          console.log(imageInput.files)
+          if(this.product?.image != imageInput?.files[0]?.name && imageInput?.files?.length !=0){
+            this.processFile(imageInput)
+          }
           this.router.navigate(['dashboard/products'])
         },
         err => {
