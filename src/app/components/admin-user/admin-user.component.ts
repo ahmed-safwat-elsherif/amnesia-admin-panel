@@ -1,6 +1,7 @@
 import { UsersService } from './../../services/users.service';
 import { identifierModuleUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-user',
@@ -23,10 +24,20 @@ export class AdminUserComponent implements OnInit {
 
 
   /*ctor*/
-  constructor(private userService: UsersService) {
+  constructor(
+    private userService: UsersService,
+    private router: Router
+    ) {
     this.getData(this.pname,0,5)
    }
+  
+  goToOrders(id){
+    this.router.navigate([`dashboard/users/orders/${id}`]);
+  }
+  deleteUser(id){
 
+    this.getData(this.pname,0,5)
+  }
   getData(pname,skip, limit) {
     this.loading = true;
     this.appear = false;

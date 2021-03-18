@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService } from '../../services/orders.service'
 
 
@@ -9,42 +10,46 @@ import { OrdersService } from '../../services/orders.service'
 })
 export class AdminUserOrdersComponent implements OnInit {
 
-  constructor(private myService: OrdersService) { }
+  constructor(
+    private myService: OrdersService,
+    private route: ActivatedRoute,
+    private router: Router
+    ) {
+      this._id = this.route.snapshot.paramMap.get('id') || "";
+      this.showAllOrders();
+     }
 
   /*var*/
-  orders
-  subscriber
+  orders =[];
+  _id="";
+  subscriber;
+  user={
+    email:"N/A"
+  };
   totalPriceArr: Array<number> = []
   ordersId: Array<number> = []
 
   isFetching = false
-
   // showAllOrders
+  orderDetails(id) {
+    this.router.navigate([`dashboard/order/details/${id}`])
+  }
   showAllOrders() {
-    // this.subscriber = this.myService.displayOrders().pipe(shareReplay({ bufferSize: 1, refCount: true }))
     console.log(this.isFetching)
     this.isFetching = true
-    this.subscriber = this.myService.displayOrders()
-      .subscribe((orders) => {
+    this.subscriber = this.myService.displayOrders(this._id)
+      .subscribe((res:any) => {
         this.isFetching = false
-        console.log(orders);
-        // console.log(Object.values(orders)[0][0]._id) //order id
-        const ordersArr = Object.values(orders)[0]
-        this.orders = ordersArr
-        console.log(this.orders) //array of orders
-        // console.log(this.orders.length)
-        // console.log(this.orders[0].products) //array of products in single order
-        // console.log(this.orders[0].products.length)
-        // console.log(this.orders[0].products[0].quantity)
-        // console.log(this.orders[0].products[0].productId)
-        // console.log(this.orders[0].products[0].productId.current_price)
+        console.log(res);
+        this.orders =  res.orders
+        this.user = res.user[0];
+        console.log(this.orders) 
 
 
         for (let i = 0; i < this.orders.length; i++) {
           var total = 0;
           var quantity = 0;
           var price = 0;
-          this.ordersId.push(Object.values(orders)[0][i]._id)
           for (let j = 0; j < this.orders[i].products.length; j++) {
             quantity = this.orders[i].products[j].quantity;
             price = this.orders[i].products[j].productId.current_price;
@@ -56,6 +61,7 @@ export class AdminUserOrdersComponent implements OnInit {
         console.log(this.ordersId)
       },
         (error) => {
+          this.isFetching = false
           console.log(error);
         }
       )

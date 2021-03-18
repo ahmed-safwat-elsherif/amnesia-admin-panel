@@ -14,7 +14,6 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { AdminFailed404Component } from './components/admin-failed404/admin-failed404.component';
 import { AuthGuardService } from './services/auth-guard.service';
-
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'failed', component: AdminFailed404Component },
@@ -25,6 +24,7 @@ const routes: Routes = [
     canActivate : [AuthGuardService],
     children: [
       { path: 'users',pathMatch: 'full', component: AdminUserComponent },
+      { path: 'users/orders/:id',pathMatch: 'full', component: AdminUserOrdersComponent },
       { path: 'orders',pathMatch: 'full', component: AdminAllOrdersComponent },
       { path: 'order/details/:id',pathMatch: 'full', component: AdminOrderDetailsComponent },
       { path: 'products',pathMatch: 'full', component: AdminProductsComponent },

@@ -1,4 +1,5 @@
 <section id="users">
+    <h1>Our Clients:</h1>
     <div class="container">
         <div class="row searchwrapper">
             <input type="text" name="" id="" [(ngModel)]="pname" class="search" (input)="searching()" placeholder="Search for name...">
@@ -19,8 +20,8 @@
                                 <p>Address: {{user.addresses || "N/A"}}</p>
                             </div>
                             <div class="icons">
-                                <i class="fas fa-shopping-cart"></i>
-                                <i class="fas fa-trash"></i>
+                                <i class="fas fa-shopping-cart" (click)="goToOrders(user._id)"></i>
+                                <!-- <i class="fas fa-trash" (click)="deleteUser(id)"></i> -->
                             </div>
 
                         </div>

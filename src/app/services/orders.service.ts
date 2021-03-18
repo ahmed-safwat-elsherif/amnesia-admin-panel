@@ -27,7 +27,7 @@ export class OrdersService {
     return this.myClient.patch(`${this.baseURL}/orders/changestatus`,{_id,orderStatus},httpOptions)
   }
   /*diplay orders*/
-  displayOrders() {
+  displayOrders(id) {
     console.log(this.token)
     const httpOptions = {
       headers: new HttpHeaders({
@@ -35,7 +35,7 @@ export class OrdersService {
         Authorization: this.token
       })
     };
-    return this.myClient.get(`${this.baseURL}/orders/fetch/all`, httpOptions);
+    return this.myClient.get(`${this.baseURL}/orders/for/${id}`, httpOptions);
   }
   getAllorders(status, limit, skip) {
     const httpOptions = {

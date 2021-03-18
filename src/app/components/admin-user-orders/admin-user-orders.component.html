@@ -1,4 +1,6 @@
 <section id="orders">
+    <h1>Client order list</h1>
+    <h3>User email address:  (<b><i>{{user?.email}}</i></b>)</h3>
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-10">
@@ -20,12 +22,15 @@
                             <td>{{totalPriceArr[i]}}</td>
                             <td>
                                 <button class="btn rounded-0" id="viewDetails"
-                                    routerLink={{ordersId[i]}}>Details</button>
+                                    (click)="orderDetails(order._id)">Details</button>
                                 <!-- <button class="btn rounded-0" id="viewDetails" [routerLink]="['/profileOrderDetails']">Details</button> -->
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="text-center" *ngIf="orders.length==0 && !isFetching">
+                    <h3>Empty: no orders</h3>
+                </div>
                 <div  *ngIf="isFetching">
                     <mat-spinner class="loading"></mat-spinner>
                     <!-- <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div> -->
