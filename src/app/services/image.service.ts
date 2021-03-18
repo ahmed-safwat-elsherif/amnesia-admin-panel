@@ -12,7 +12,18 @@ export class ImageService {
   token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMxYTM0NzI4MmQ4MDAwMTVmODczZjgiLCJpYXQiOjE2MTQ0NDE1NzV9.y3PBLeU1Y-SlAxmqVKjTiT8BMnbVPEIgFy8hs7VHiRA'
 
   private baseURL: string = "https://amnesia-skincare.herokuapp.com/api"
+  public uploadImage(id,image: File){
+    const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':localStorage.getItem('token')
+        })
+      };
+    const formData = new FormData();
 
+    formData.append('image', image);
+
+    return this.myClient.post(`${this.baseURL}/images/product/${id}`, formData,httpOptions);
+  }
   //get profile image
   getProfileImage(imgname) {
     console.log(imgname)

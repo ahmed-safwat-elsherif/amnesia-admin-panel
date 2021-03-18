@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-failed404',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminFailed404Component implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route:ActivatedRoute,
+    private router:Router
+  ) { }
 
   ngOnInit(): void {
   }
-
+  goHome(){
+    this.router.navigate(['dashboard']);
+  }
 }

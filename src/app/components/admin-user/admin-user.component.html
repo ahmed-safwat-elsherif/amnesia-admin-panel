@@ -1,20 +1,20 @@
 <section id="users">
     <div class="container">
         <div class="row searchwrapper">
-            <input type="text" name="" id="" class="search" placeholder="Search for name...">
+            <input type="text" name="" id="" [(ngModel)]="pname" class="search" (input)="searching()" placeholder="Search for name...">
         </div>
         <div *ngIf="!isFetching">
             <div class="row conusers">
 
                 <div class="col-xs-3 lg-3" *ngFor="let user of allData">
-                    <div class="card" style="width: 18rem;">
+                    <div  class="card" style="width: 18rem;">
                         <img class="card-img-top"
                             src="https://amnesia-skincare.herokuapp.com/api/images/show/{{user.profileImage}}"
                             alt="user image">
                         <div class="card-body">
-                            <h3 class="card-title">{{user.firstname}} {{user.lastname}}</h3>
+                            <h3 class="card-title">{{user?.firstname}} {{user?.lastname}}</h3>
                             <div class="card-text">
-                                <p>Gender: {{user.gender}}</p>
+                                <p>Gender: {{user?.gender}}</p>
                                 <p>Phone: {{user.phones || "N/A"}}</p>
                                 <p>Address: {{user.addresses || "N/A"}}</p>
                             </div>

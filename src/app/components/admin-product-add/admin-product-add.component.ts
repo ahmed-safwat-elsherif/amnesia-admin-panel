@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ImageService } from 'src/app/services/image.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class AdminProductAddComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private imageService: ImageService
   ) { }
   product: any={
     name:"",
@@ -26,14 +28,35 @@ export class AdminProductAddComponent implements OnInit {
   imageFileName="";
   ngOnInit(): void {
   }
+  selectedFile: ImageSnippet;
+  processFile(imageInput: any,id) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
 
+    reader.addEventListener('load', (event: any) => {
+
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+
+      this.imageService.uploadImage(id, this.selectedFile.file).subscribe(
+        (res) => {
+          console.log(res)
+        },
+        (err) => {
+          console.log(err)
+        })
+    });
+
+    reader.readAsDataURL(file);
+  }
   /*add*/
-  add() {
+  add(imageInput) {
     this.product;
     this.productService.addProduct(this.product)
       .subscribe(
         (res: any) => {
           console.log(res)
+          let id = res.newProduct?._id
+          this.processFile(imageInput,id)
           this.router.navigate(['dashboard/products'])
         },
         err => {
@@ -47,4 +70,7 @@ export class AdminProductAddComponent implements OnInit {
     this.router.navigate(['dashboard/products'])
   }
 
+}
+class ImageSnippet {
+  constructor(public src: string, public file: File) { }
 }

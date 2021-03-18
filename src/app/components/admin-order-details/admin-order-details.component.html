@@ -43,19 +43,19 @@
                                 <tbody>
                                     <tr>
                                         <td>Full Name:</td>
-                                        <td>{{orderInfo?.userId.firstname}} {{orderInfo?.userId.lastname}}</td>
+                                        <td>{{orderInfo?.userId?.firstname || "N/A"}} {{orderInfo?.userId?.lastname || "N/A"}}</td>
                                     </tr>
                                     <tr>
                                         <td>Email:</td>
-                                        <td>{{orderInfo?.userId.email}}</td>
+                                        <td>{{orderInfo?.userId?.email || "N/A"}}</td>
                                     </tr>
                                     <tr>
                                         <td>Address:</td>
-                                        <td>{{orderInfo?.userId.address}}</td>
+                                        <td>{{orderInfo?.userId?.address || "N/A"}}</td>
                                     </tr>
                                     <tr>
                                         <td>Phone:</td>
-                                        <td>{{orderInfo?.userId.phones}}</td>
+                                        <td>{{orderInfo?.userId?.phones || "N/A"}}</td>
                                     </tr>
                                 </tbody>
                             </table>

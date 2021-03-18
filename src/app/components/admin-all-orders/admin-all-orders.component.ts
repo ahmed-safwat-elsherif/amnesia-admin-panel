@@ -45,6 +45,20 @@ export class AdminAllOrdersComponent implements OnInit {
         this.allData = res.orders;
         this.allData.map((order,index)=>{
           this.allData[index].totalPrice = 0;
+          let date = new Date(order?.createdAt);
+          let year = date.getFullYear();
+          let month:any = date.getMonth()+1;
+          let dt:any = date.getDate();
+
+          if (dt < 10) {
+            dt = '0' + dt;
+          }
+          if (month < 10) {
+            month = '0' + month;
+          }
+
+          order.createdAt = year+'-' + month + '-'+dt;
+          
           order.products.map((product)=>{
             this.allData[index].totalPrice += (product.quantity * (product.productId?.current_price || 0));
           })

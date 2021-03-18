@@ -81,14 +81,15 @@ export class UsersService {
   }
 
   //get all users
-  getAllUsers(limit,skip){
+  getAllUsers(pname,limit,skip){
+    console.log({pname,limit,skip})
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: this.token
       })
     };
-    return this.myClient.get(`${this.baseURL}/users/get/users/?limit=${limit}&skip=${skip}`,httpOptions);
+    return this.myClient.get(`${this.baseURL}/users/get/users/${pname}?limit=${limit}&skip=${skip}`,httpOptions);
 
     // return this.myClient.get(this.amnesiaURL + "products/?limit="+take +"&skip="+skip );
   }

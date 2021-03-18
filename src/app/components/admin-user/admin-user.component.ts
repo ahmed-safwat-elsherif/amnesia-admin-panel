@@ -18,19 +18,21 @@ export class AdminUserComponent implements OnInit {
   skipGlobal
   limitGlobal
   isFetching=false;
-  noOfProducts = 0
+  noOfProducts = 0;
+  pname="";
+
 
   /*ctor*/
   constructor(private userService: UsersService) {
-    this.getData(0,5)
+    this.getData(this.pname,0,5)
    }
 
-  getData(skip, limit) {
+  getData(pname,skip, limit) {
     this.loading = true;
     this.appear = false;
     this.skipGlobal = skip;
     this.isFetching=true;
-    this.userService.getAllUsers(limit, skip).subscribe(
+    this.userService.getAllUsers(pname,limit, skip).subscribe(
       (res: any) => {
         console.log(res)
         this.loading = false;
@@ -39,10 +41,18 @@ export class AdminUserComponent implements OnInit {
         console.log(this.allData)
         this.obj = res.users;
         this.arrnoOfPages = [];
-        this.noOfProducts = res.length
-        this.noOfPages = Math.ceil(res.length / 5);
-        for (let i = 1; i <= this.noOfPages; i++) {
-          this.arrnoOfPages.push(i);
+        if(this.pname.length==0){
+          this.noOfProducts = res.length;
+          this.noOfPages = Math.ceil(res.length / 5);
+          for (let i = 1; i <= this.noOfPages; i++) {
+            this.arrnoOfPages.push(i);
+          }
+        }else{
+          this.noOfProducts = this.allData.length;
+          this.noOfPages = Math.ceil(this.noOfProducts / 5);
+          for (let i = 1; i <= this.noOfPages; i++) {
+            this.arrnoOfPages.push(i);
+          }
         }
         console.log(this.arrnoOfPages)
         this.isFetching=false;
@@ -57,10 +67,16 @@ export class AdminUserComponent implements OnInit {
 
 
   paginate(val) {
-    this.getData((((val * 5) - 5)), (val * 5));
+    this.getData(this.pname,(((val * 5) - 5)), (val * 5));
     this.skipGlobal = (val * 5) - 5;
   }
 
+  searching(){
+    setTimeout(()=>{
+      console.log("searching")
+      this.getData(this.pname,0, 5)
+    },500)
+  }
 
   ngOnInit(): void {
     this.paginate(1);

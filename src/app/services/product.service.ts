@@ -49,6 +49,6 @@ export class ProductService{
       return this.http.post(`${this.amnesiaURL}products/product`,product,httpOptions)
     }
     addImage(id,image){
-
+      
     }
 }

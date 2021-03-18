@@ -5,6 +5,15 @@
 #admin .row{
     justify-content: center;
 }
+.dashboard-title span{
+    font-family: 'Berkshire Swash', cursive;
+    color: whitesmoke;
+    font-size: 2rem;
+}
+.dashboard-subtitle{
+    color: whitesmoke;
+    text-decoration: underline;
+}
 #sidebarCollapse {
     width: 40px;
     height: 40px;
