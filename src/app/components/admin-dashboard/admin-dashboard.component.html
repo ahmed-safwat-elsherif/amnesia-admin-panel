@@ -1,0 +1,27 @@
+<section id="admin">
+    <div class="wrapper">
+        <nav id="sidebar">
+            <ul class="list-unstyled components">
+                <!-- <p><i class="fas fa-tachometer-alt"></i> Dashboard</p> -->
+                <p><i class="fas fa-users"></i> Users</p>
+                <li (click)="onClick('dashboard/users')">All Users</li>
+                <p><i class="fas fa-shopping-cart"></i> Orders</p>
+                <li (click)="onClick('dashboard/orders')">Orders</li>
+                <p><i class="fas fa-store"></i> Products</p>
+                <li (click)="onClick('dashboard/products')">All Products</li>
+                <p><i class="fas fa-cog"></i> Settings</p>
+                <li (click)="logout()">Logout</li>
+            </ul>
+        </nav>
+        <div id="content">
+            <button type="button" id="sidebarCollapse" class="navbar-btn" (click)="toggle()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div id="cont">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</section>
