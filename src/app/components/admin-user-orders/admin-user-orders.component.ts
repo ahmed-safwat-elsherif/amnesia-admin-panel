@@ -52,9 +52,10 @@ export class AdminUserOrdersComponent implements OnInit {
           var price = 0;
           for (let j = 0; j < this.orders[i].products.length; j++) {
             quantity = this.orders[i].products[j].quantity;
-            price = this.orders[i].products[j].productId.current_price;
+            price = this.orders[i].products[j].productId?.current_price || 0;
             total += quantity * price
           }
+          this.orders[i].totalPrice = total;
           this.totalPriceArr.push(total)
         }
         console.log(this.totalPriceArr)

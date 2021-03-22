@@ -19,7 +19,7 @@
                             <th>{{order._id}}</th>
                             <td>{{order.createdAt}}</td>
                             <td>{{order.orderStatus}}</td>
-                            <td>{{totalPriceArr[i] || 0}}</td>
+                            <td>{{order.totalPrice || 0}}</td>
                             <td>
                                 <button class="btn rounded-0" id="viewDetails"
                                     (click)="orderDetails(order._id)">Details</button>
