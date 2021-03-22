@@ -49,6 +49,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AdminFailed404Component } from './components/admin-failed404/admin-failed404.component';
+import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
 
 
 
@@ -93,6 +94,7 @@ const materialUi = [
     AdminProductEditComponent,
     AdminLoginComponent,
     AdminFailed404Component,
+    ScrollToTopComponent,
   ],
   imports: [
     BrowserModule,

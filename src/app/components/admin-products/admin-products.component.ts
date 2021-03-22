@@ -28,7 +28,7 @@ export class AdminProductsComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.getData(this.pname,0, 5)
+    this.getData(this.pname,0, 15)
   }
   getData(pname,skip, limit) {
     console.log(status, skip, limit)
@@ -54,13 +54,13 @@ export class AdminProductsComponent implements OnInit {
         this.arrnoOfPages = [];
         if(this.pname.length==0){
           this.noOfProducts = res.length;
-          this.noOfPages = Math.ceil(res.length / 5);
+          this.noOfPages = Math.ceil(res.length / 15);
           for (let i = 1; i <= this.noOfPages; i++) {
             this.arrnoOfPages.push(i);
           }
         }else{
           this.noOfProducts = this.allData.length;
-          this.noOfPages = Math.ceil(this.noOfProducts / 5);
+          this.noOfPages = Math.ceil(this.noOfProducts / 15);
           for (let i = 1; i <= this.noOfPages; i++) {
             this.arrnoOfPages.push(i);
           }
@@ -76,13 +76,13 @@ export class AdminProductsComponent implements OnInit {
     )
   }
   paginate(val) {
-    this.getData(this.pname,(((val * 5) - 5)), (val * 5));
-    this.skipGlobal = (val * 5) - 5
+    this.getData(this.pname,(((val * 15) - 15)), (val * 15));
+    this.skipGlobal = (val * 15) - 15
   }
   searching(){
     setTimeout(()=>{
       console.log("searching")
-      this.getData(this.pname,0, 5)
+      this.getData(this.pname,0, 15)
     },500)
   }
   /*add*/
